@@ -16,10 +16,10 @@
             "parameters": {},
             "additionalParameters": "allowed"
           },
-          "semanticObject": "uimodule",
+          "semanticObject": "Clientes",
           "action": "display",
-          "title": "Clientes",
-          "icon": "sap-icon://add"
+          "title": "{{appTitle}}",
+          "icon": "sap-icon://customer"
         }
       }
     }
@@ -46,7 +46,7 @@
       "viewName": "profertil.ctesPorZona.view.App",
       "type": "XML",
       "async": true,
-      "id": "idAppControl"
+      "id": "app"
     },
     "dependencies": {
       "minUI5Version": "1.60.0",
@@ -80,25 +80,29 @@
         "routerClass": "sap.m.routing.Router",
         "viewType": "XML",
         "viewPath": "profertil.ctesPorZona.view",
-        "controlId": "idAppControl",
+        "controlId": "app",
         "controlAggregation": "pages",
         "async": true
       },
       "routes": [
         {
-          "name": "RouteApp",
-          "pattern": "RouteApp",
-          "target": [
-            "TargetApp"
-          ]
+          "name": "Customers",
+          "pattern": "",
+          "target": ["customers"]
         }
       ],
       "targets": {
         "TargetApp": {
           "viewType": "XML",
           "viewLevel": 1,
-          "viewId": "idAppControl",
+          "viewId": "app",
           "viewName": "App"
+        },
+        "customers": {
+          "viewType": "XML",
+          "viewLevel": 1,
+          "viewId": "Customers",
+          "viewName": "Customers"
         }
       }
     }

@@ -1,0 +1,6 @@
+ <mvc:View controllerName="profertil.ctesPorZona.controller.Customers"
+  displayBlock="true"
+  xmlns="sap.m"
+  xmlns:mvc="sap.ui.core.mvc">
+  <MessagePage id="mPage"/>
+</mvc:View>
