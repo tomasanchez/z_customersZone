@@ -1,0 +1,16 @@
+{
+  "generator-easy-ui5": {
+    "projectname": "ctesPorZona",
+    "namespace": "profertil",
+    "platform": "SAP Launchpad service",
+    "viewtype": "XML",
+    "viewname": "App",
+    "ui5libs": "Content delivery network (SAPUI5)",
+    "newdir": true,
+    "namespaceURI": "profertil",
+    "uimodules": [
+      "uimodule"
+    ],
+    "setupCompleted": true
+  }
+}
