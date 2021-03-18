@@ -22,6 +22,16 @@
           "icon": "sap-icon://customer"
         }
       }
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "sap/opu/odata/sap/ZSV_CTES_POR_ZONA/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0",
+          "localUri": "localService/metadata.xml"
+        }
+      }
     }
   },
   "sap.ui": {
@@ -66,6 +76,16 @@
         "settings": {
           "bundleName": "profertil.ctesPorZona.i18n.i18n"
         }
+      },
+      "": {
+        "type": "sap.ui.model.odata.v2.ODataModel",
+        "settings": {
+          "defaultOperationMode": "Server",
+          "defaultBindingMode": "TwoWay",
+          "defaultCountMode": "Inline",
+          "preload": true
+        },
+        "dataSource": "mainService"
       }
     },
     "resources": {
@@ -88,7 +108,9 @@
         {
           "name": "Customers",
           "pattern": "",
-          "target": ["customers"]
+          "target": [
+            "customers"
+          ]
         }
       ],
       "targets": {

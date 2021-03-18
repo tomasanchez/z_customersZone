@@ -2,6 +2,12 @@
   "welcomeFile": "/flpSandbox.html",
   "routes": [
     {
+    "authenticationType": "none",
+    "csrfProtection": false,
+    "source": "^/sap/opu/odata/sap/(.*)",
+    "destination": "BACKEND_SAP"
+    },
+    {
       "source": "^(.*)",
       "target": "$1",
       "authenticationType": "xsuaa",
