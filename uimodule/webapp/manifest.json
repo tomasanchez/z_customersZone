@@ -26,7 +26,6 @@
     "dataSources": {
       "mainService": {
         "uri": "sap/opu/odata/sap/ZSV_CTES_POR_ZONA_SRV/",
-        "type": "OData",
         "settings": {
           "odataVersion": "2.0",
           "localUri": "localService/metadata.xml"
@@ -108,7 +107,9 @@
         {
           "name": "Customers",
           "pattern": "",
-          "target": ["customers"]
+          "target": [
+            "customers"
+          ]
         }
       ],
       "targets": {
