@@ -76,14 +76,14 @@
       <!-- Semantic Footer Buttons -->
 		<semantic:footerMainAction>
       <!-- Enable select button -->
-			<semantic:FooterMainAction id="selectDownloadsAction" text="{i18n>selectDownload}" press=".onSelectDownloads" tooltip="{}" visible="{remitosView>/showSelectDownloads}"/>
+			<semantic:FooterMainAction id="selectSearchAction" text="{i18n>selectSearch}" press=".onSelectSearch" tooltip="{}" visible="{customersView>/showSelect}"/>
 		</semantic:footerMainAction>
     <!-- Custom Buttons -->
 		<semantic:footerCustomActions>
-      <!-- Download Button -->
-      <Button id="downloadAction" icon="sap-icon://download" press=".onDownload" text="Descargar" type="Emphasized" tooltip="{i18n>downloadButton}" visible="{remitosView>/showDownload}"/>
+      <!-- Search Button -->
+      <Button id="searchAction" icon="sap-icon://search" press=".onSearch" text="{i18n>search}" type="Emphasized" tooltip="{i18n>searchButton}" visible="{customersView>/showSearch}"/>
       <!-- Cancel Button -->
-			<Button id="cancelAction"  icon="sap-icon://decline" press=".onCancelDownloads" text="Cancelar" type="Reject" tooltip="{i18n>cancelDownloadButton}" visible="{remitosView>/showDownload}"/>
+			<Button id="cancelAction"  icon="sap-icon://decline" press=".onCancelSearch" text="{i18n>cancel}" type="Reject" tooltip="{i18n>cancelSelectButton}" visible="{customersView>/showSearch}"/>
 		</semantic:footerCustomActions>
   </semantic:SemanticPage>
 </mvc:View>
