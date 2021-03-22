@@ -28,6 +28,7 @@
         id="filterbar" 
         persistencyKey="UniqueAndStablePersistencyKey" 
         considerSelectionVariants="true"
+        entitySet="ClientesSet"
         useDateRangeType="true" 
         showFilterConfiguration="false" 
         showRestoreButton="false"
@@ -35,11 +36,8 @@
         showRestoreOnFB="true">
         <!-- Controls -->
         <smartFilterBar:controlConfiguration>
-          <!-- Date Control -->
-          <smartFilterBar:ControlConfiguration id="fechaCtrl" key="Fecha" index="0" label="{i18n>dateDpLabel}" groupId="_BASIC" 
-            conditionType="sap.ui.comp.config.condition.DateRangeType"
-            visibleInAdvancedArea="true">
-          </smartFilterBar:ControlConfiguration>
+          <!-- Bzirk Control -->
+          <smartFilterBar:ControlConfiguration id="bzirkCtrl" key="Bzirk" index="0" label="{i18n>bzirkLabel}" groupId="_BASIC" width="300px" />
         </smartFilterBar:controlConfiguration>
       <!-- layout data used to make the table growing but the filter bar fixed -->
         <smartFilterBar:layoutData>
@@ -51,6 +49,28 @@
 		<semantic:content>
       <!-- Vbox Container -->
       <VBox id="contentContainer"  fitContainer="true" alignContent="Center" alignItems="Center" class="sapUiNoContentPadding">
+          <!-- Smart Table -->
+        <sap.ui.comp.smarttable:SmartTable 
+          xmlns:sap.ui.comp.smarttable="sap.ui.comp.smarttable"
+          persistencyKey="SmartTable" 
+          entitySet="ClientesSet" 
+          width="100%" 
+          direction="Column" 
+          showRowCount="true"
+          fitContainer="true" 
+          tableType="ResponsiveTable"
+          enableAutoBinding="true" 
+          id="ClientesSet"
+          smartFilterId="filterbar"
+          demandPopin="true"
+          useVariantManagement="false"
+          showVariantManagement="false"
+          showFullScreenButton="true"
+          initiallyVisibleFields="Kunnr,Name1"
+          justifyContent="Center"
+          class="sapUiResponsiveContentPadding"
+          alignContent="Center">
+        </sap.ui.comp.smarttable:SmartTable>  
       </VBox>
     </semantic:content>
       <!-- Semantic Footer Buttons -->
