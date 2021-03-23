@@ -1,5 +1,5 @@
-# Clientes por Zona
-Clientes por Zona allows an Administrator to see details of certain customers and see its 
+# Customers per Zone
+Customers per Zone allows an Administrator to see details of certain customers and see their balances. 
 
 See [Chengelog](./CHANGELOG.md).
 
