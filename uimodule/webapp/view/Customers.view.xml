@@ -39,8 +39,8 @@
           <!-- Bzirk Control -->
           <smartFilterBar:ControlConfiguration id="bzirkCtrl" key="Bzirk" index="0" label="{i18n>bzirkLabel}" groupId="_BASIC" width="450px" mandatory="mandatory">
             <smartFilterBar:customControl>
-              <ComboBox id="bzirkCB" showSecondaryValues="false" placeholder="{i18n>bzirkPH}" items="{/ZonasSet}">
-                <core:ListItem id="bnzirkCB-item" key="{Bzirk}" text="{Bztxt}" additionalText="{Werks}"/>
+              <ComboBox id="bzirkCB" showSecondaryValues="true" placeholder="{i18n>bzirkPH}" items="{/ZonasSet}">
+                <core:ListItem id="bnzirkCB-item" key="{Bzirk}" text="{Bztxt}" additionalText="{path: 'Bzirk', formatter:'.formatter.deleteLeadingZeros'}"/>
               </ComboBox>
             </smartFilterBar:customControl>
           </smartFilterBar:ControlConfiguration>
@@ -63,6 +63,8 @@
           width="100%" 
           direction="Column" 
           showRowCount="true"
+          header="Clientes"
+          showTablePersonalisation="false"
           fitContainer="true" 
           tableType="ResponsiveTable"
           enableAutoBinding="true" 
@@ -78,13 +80,40 @@
           class="sapUiResponsiveContentPadding"
           beforeRebindTable="onBeforeRebindCustomersTable"
           alignContent="Center">
+          <Table 
+            id="ClientesSet"
+            alternateRowColors="true"
+            mode="{customersView>/tableSelectionMode}"
+            growing="true"
+            growingThreshold="20"
+            sticky="ColumnHeaders,HeaderToolbar">
+            <columns>
+              <!-- Custom Kunnr Column -->
+              <Column id="KunnrCol" width="200px" hAlign="End">
+                <customData>
+                <core:CustomData 
+                  key="p13nData" 
+                  value='\{"columnKey": "Kunnr", "maxLength": "10","columnIndex":"0", "isCurrency": false, "leadingProperty": "Kunnr", "sortProperty": "Kunnr", "type": "string"}' />
+                </customData>
+                <Label id="header-kunnr-label" text="{/#Clientes/Kunnr/@sap:label}"/>
+              </Column>
+            </columns>
+            <items>
+              <ColumnListItem id="customCustomerItem">
+                <cells>
+                  <!-- Custom Kunnr Cell -->
+                  <Text id="customer-kunnr" text="{path:'Kunnr', formatter:'.formatter.deleteLeadingZeros'}"/>
+                </cells>
+              </ColumnListItem>
+            </items>
+          </Table>
         </sap.ui.comp.smarttable:SmartTable> 
         <VBox id="subcontent" class="sapUiResponsiveContentPadding">
         <!-- Smart Table -->
           <sap.ui.comp.smarttable:SmartTable 
             xmlns:sap.ui.comp.smarttable="sap.ui.comp.smarttable"
-            persistencyKey="SmartTable" 
-            entitySet="ClientesSet" 
+            persistencyKey="BalancesTable" 
+            entitySet="BalancesSet" 
             width="100%" 
             direction="Column" 
             showRowCount="true"
@@ -92,14 +121,12 @@
             tableType="ResponsiveTable"
             enableAutoBinding="true" 
             id="balanceTable"
-            smartFilterId="filterbar"
             demandPopin="true"
             useVariantManagement="false"
             showVariantManagement="false"
             showFullScreenButton="true"
-            initiallyVisibleFields="Kunnr,Name1"
-            ignoredFields="Bzirk"
             justifyContent="Center"
+            initiallyVisibleFields="Kunnr,Name1"
             class="sapUiResponsiveContentPadding"
             alignContent="Center">
           </sap.ui.comp.smarttable:SmartTable> 
