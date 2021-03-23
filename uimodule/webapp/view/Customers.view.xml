@@ -1,5 +1,5 @@
  <mvc:View controllerName="profertil.ctesPorZona.controller.Customers"
-  xmlns:smartFilterBar="sap.ui.comp.smartfilterbar" 
+  xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
   xmlns:core="sap.ui.core" 
   xmlns:mvc="sap.ui.core.mvc"
   xmlns="sap.m" 
@@ -37,7 +37,13 @@
         <!-- Controls -->
         <smartFilterBar:controlConfiguration>
           <!-- Bzirk Control -->
-          <smartFilterBar:ControlConfiguration id="bzirkCtrl" key="Bzirk" index="0" label="{i18n>bzirkLabel}" groupId="_BASIC" width="300px" />
+          <smartFilterBar:ControlConfiguration id="bzirkCtrl" key="Bzirk" index="0" label="{i18n>bzirkLabel}" groupId="_BASIC" width="450px" mandatory="mandatory">
+            <smartFilterBar:customControl>
+              <ComboBox id="bzirkCB" showSecondaryValues="false" placeholder="{i18n>bzirkPH}" items="{/ZonasSet}">
+                <core:ListItem id="bnzirkCB-item" key="{Bzirk}" text="{Bztxt}" additionalText="{Werks}"/>
+              </ComboBox>
+            </smartFilterBar:customControl>
+          </smartFilterBar:ControlConfiguration>
         </smartFilterBar:controlConfiguration>
       <!-- layout data used to make the table growing but the filter bar fixed -->
         <smartFilterBar:layoutData>
@@ -60,17 +66,44 @@
           fitContainer="true" 
           tableType="ResponsiveTable"
           enableAutoBinding="true" 
-          id="ClientesSet"
+          id="customersTable"
           smartFilterId="filterbar"
           demandPopin="true"
           useVariantManagement="false"
           showVariantManagement="false"
           showFullScreenButton="true"
           initiallyVisibleFields="Kunnr,Name1"
+          ignoredFields="Bzirk"
           justifyContent="Center"
           class="sapUiResponsiveContentPadding"
+          beforeRebindTable="onBeforeRebindCustomersTable"
           alignContent="Center">
-        </sap.ui.comp.smarttable:SmartTable>  
+        </sap.ui.comp.smarttable:SmartTable> 
+        <VBox id="subcontent" class="sapUiResponsiveContentPadding">
+        <!-- Smart Table -->
+          <sap.ui.comp.smarttable:SmartTable 
+            xmlns:sap.ui.comp.smarttable="sap.ui.comp.smarttable"
+            persistencyKey="SmartTable" 
+            entitySet="ClientesSet" 
+            width="100%" 
+            direction="Column" 
+            showRowCount="true"
+            fitContainer="true" 
+            tableType="ResponsiveTable"
+            enableAutoBinding="true" 
+            id="balanceTable"
+            smartFilterId="filterbar"
+            demandPopin="true"
+            useVariantManagement="false"
+            showVariantManagement="false"
+            showFullScreenButton="true"
+            initiallyVisibleFields="Kunnr,Name1"
+            ignoredFields="Bzirk"
+            justifyContent="Center"
+            class="sapUiResponsiveContentPadding"
+            alignContent="Center">
+          </sap.ui.comp.smarttable:SmartTable> 
+        </VBox>
       </VBox>
     </semantic:content>
       <!-- Semantic Footer Buttons -->

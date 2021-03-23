@@ -12,9 +12,11 @@ sap.ui.define(
   [
     "profertil/ctesPorZona/controller/BaseController",
     "sap/ui/model/json/JSONModel",
+    "sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator",
     "../model/formatter",
   ],
-  function (Controller, JSONModel, formatter) {
+  function (Controller, JSONModel, Filter, FilterOperator, formatter) {
     "use strict";
 
     // Bind this shortcut
@@ -85,6 +87,27 @@ sap.ui.define(
       // eslint-disable-next-line no-unused-vars
       onCancelSearch: (_oEvent) => {
         oController.onSelectSearch(null, false);
+      },
+
+      /**
+       * Triggered before table rebind.
+       *
+       * Handles custom rebind options.
+       * @function
+       * @param {sap.ui.base.Event} oEvent the event of rebinding the table
+       * @public
+       */
+      onBeforeRebindCustomersTable: function (oEvent) {
+        var mBindingParams = oEvent.getParameter("bindingParams");
+        var oSmtFilter = this.getView().byId("filterbar");
+
+        //Bzirk Custom Filter
+        var oComboBox = oSmtFilter.getControlByKey("Bzirk");
+        var sWerks = oComboBox.getSelectedKey();
+        if (sWerks) {
+          var newFilter = new Filter("Bzirk", FilterOperator.EQ, sWerks);
+          mBindingParams.filters.push(newFilter);
+        }
       },
 
       /* =========================================================== */
