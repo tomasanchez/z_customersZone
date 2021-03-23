@@ -45,6 +45,7 @@ sap.ui.define(
         oViewModel = new JSONModel({
           showSelect: true,
           showSearch: false,
+          tableSelectionMode: "None",
         });
 
         oController.setModel(oViewModel, "customersView");
@@ -73,7 +74,7 @@ sap.ui.define(
        * @public
        */
       onSelectSearch: (_oEvent, bActive = true) => {
-        //oController._toggleTableSelection(bActive);
+        oController._toggleTableSelection(bActive);
         oController._toggleDownloadButtons(bActive);
       },
 
@@ -124,6 +125,20 @@ sap.ui.define(
         var oViewModel = oController.getModel("customersView");
         oViewModel.setProperty("/showSearch", bActive);
         oViewModel.setProperty("/showSelect", !bActive);
+      },
+
+      /**
+       * Enables or disables multi-selection in the table.
+       * @function
+       * @private
+       * @param {boolean} bActive active select mode ?
+       */
+      _toggleTableSelection: (bActive = false) => {
+        var oViewModel = oController.getModel("customersView");
+        oViewModel.setProperty(
+          "/tableSelectionMode",
+          bActive ? "MultiSelect" : "None"
+        );
       },
       /* =========================================================== */
       /* End of Internal Methods                                     */
