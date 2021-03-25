@@ -10,7 +10,7 @@
 /* eslint-disable no-warning-comments */
 sap.ui.define(
   [
-    "profertil/ctesPorZona/controller/BaseController",
+    "profertil/ctesPorZona/controller/ValueHelp",
     "sap/ui/model/json/JSONModel",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",

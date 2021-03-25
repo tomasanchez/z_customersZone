@@ -44,6 +44,12 @@
               </ComboBox>
             </smartFilterBar:customControl>
           </smartFilterBar:ControlConfiguration>
+           <!-- Test Control -->
+          <smartFilterBar:ControlConfiguration id="kunnrCtrl" key="Kunnr" index="0" label="Clientes" groupId="_BASIC" width="450px" mandatory="auto">
+            <smartFilterBar:customControl>
+              <MultiInput  id="kunnrMI" showValueHelp="true" valueHelpOnly="true" valueHelpRequest=".onVHPKunnr"/>
+            </smartFilterBar:customControl>
+          </smartFilterBar:ControlConfiguration>
         </smartFilterBar:controlConfiguration>
       <!-- layout data used to make the table growing but the filter bar fixed -->
         <smartFilterBar:layoutData>
