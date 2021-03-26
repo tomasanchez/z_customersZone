@@ -98,22 +98,28 @@ sap.ui.define(
        * @param {sap.ui.base.Event} oEvent the event of rebinding the table
        * @public
        */
-      onBeforeRebindCustomersTable: function (oEvent) {
+      onBeforeRebindBalancesTable: function (oEvent) {
         var mBindingParams = oEvent.getParameter("bindingParams");
         var oSmtFilter = this.getView().byId("filterbar");
 
-        //Bzirk Custom Filter
-        var oComboBox = oSmtFilter.getControlByKey("Bzirk");
-        var sWerks = oComboBox.getSelectedKey();
-        if (sWerks) {
-          var newFilter = new Filter("Bzirk", FilterOperator.EQ, sWerks);
-          mBindingParams.filters.push(newFilter);
-        }
+        //Kunnr Custom Filter
+        var oMultiInput = oSmtFilter.getControlByKey("Kunnr"),
+          aTokens = oMultiInput.getTokens();
+
+        oController._filterTokens(mBindingParams, aTokens);
       },
 
       /* =========================================================== */
       /* Internal Methods                                            */
       /* =========================================================== */
+
+      _filterTokens: function (mBindingParams, aTokens) {
+        var aFilters = aTokens.map(
+          (oToken) => new Filter("Kunnr", FilterOperator.EQ, oToken.getKey())
+        );
+
+        aFilters.forEach((oFilter) => mBindingParams.filters.push(oFilter));
+      },
 
       /**
        * Enables or disable visibility of buttons by changing model property.

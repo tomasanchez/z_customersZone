@@ -28,7 +28,7 @@
         id="filterbar" 
         persistencyKey="UniqueAndStablePersistencyKey" 
         considerSelectionVariants="true"
-        entitySet="ClientesSet"
+        entitySet="BalancesSet"
         useDateRangeType="true" 
         showFilterConfiguration="false" 
         showRestoreButton="false"
@@ -37,17 +37,17 @@
         <!-- Controls -->
         <smartFilterBar:controlConfiguration>
           <!-- Bzirk Control -->
-          <smartFilterBar:ControlConfiguration id="bzirkCtrl" key="Bzirk" index="0" label="{i18n>bzirkLabel}" groupId="_BASIC" width="450px" mandatory="mandatory">
+          <smartFilterBar:ControlConfiguration id="bzirkCtrl" key="Bzirk" index="0" label="{i18n>bzirkLabel}" groupId="_BASIC" width="450px" mandatory="auto" visible="false">
             <smartFilterBar:customControl>
               <ComboBox id="bzirkCB" showSecondaryValues="true" placeholder="{i18n>bzirkPH}" items="{/ZonasSet}">
-                <core:ListItem id="bnzirkCB-item" key="{Bzirk}" text="{Bztxt}" additionalText="{path: 'Bzirk', formatter:'.formatter.deleteLeadingZeros'}"/>
+                <core:ListItem id="bnzirkCB-item" key="{Bzirk}" text="{path: 'Bzirk', formatter:'.formatter.deleteLeadingZeros'}" additionalText="{Bztxt}"/>
               </ComboBox>
             </smartFilterBar:customControl>
           </smartFilterBar:ControlConfiguration>
            <!-- Test Control -->
-          <smartFilterBar:ControlConfiguration id="kunnrCtrl" key="Kunnr" index="0" label="Clientes" groupId="_BASIC" width="450px" mandatory="auto">
+          <smartFilterBar:ControlConfiguration id="kunnrCtrl" key="Kunnr" index="0" label="{i18n>kunnrsLabel}" groupId="_BASIC" width="450px" mandatory="mandatory">
             <smartFilterBar:customControl>
-              <MultiInput  id="kunnrMI" showValueHelp="true" valueHelpOnly="true" valueHelpRequest=".onVHPKunnr"/>
+              <MultiInput  id="kunnrMI" showValueHelp="true" valueHelpOnly="true" valueHelpRequest=".onVHPKunnr" placeholder="{i18n>kunnrMIPH}" valueStateText="{i18n>kunnrsState}"/>
             </smartFilterBar:customControl>
           </smartFilterBar:ControlConfiguration>
         </smartFilterBar:controlConfiguration>
@@ -61,60 +61,6 @@
 		<semantic:content>
       <!-- Vbox Container -->
       <VBox id="contentContainer"  fitContainer="true" alignContent="Center" alignItems="Center" class="sapUiNoContentPadding">
-          <!-- Smart Table -->
-        <sap.ui.comp.smarttable:SmartTable 
-          xmlns:sap.ui.comp.smarttable="sap.ui.comp.smarttable"
-          persistencyKey="SmartTable" 
-          entitySet="ClientesSet" 
-          width="100%" 
-          direction="Column" 
-          showRowCount="true"
-          header="Clientes"
-          showTablePersonalisation="false"
-          fitContainer="true" 
-          tableType="ResponsiveTable"
-          enableAutoBinding="true" 
-          id="customersTable"
-          smartFilterId="filterbar"
-          demandPopin="true"
-          useVariantManagement="false"
-          showVariantManagement="false"
-          showFullScreenButton="true"
-          initiallyVisibleFields="Kunnr,Name1"
-          ignoredFields="Bzirk"
-          justifyContent="Center"
-          class="sapUiResponsiveContentPadding"
-          beforeRebindTable="onBeforeRebindCustomersTable"
-          alignContent="Center">
-          <Table 
-            id="ClientesSet"
-            alternateRowColors="true"
-            mode="{customersView>/tableSelectionMode}"
-            growing="true"
-            growingThreshold="20"
-            sticky="ColumnHeaders,HeaderToolbar">
-            <columns>
-              <!-- Custom Kunnr Column -->
-              <Column id="KunnrCol" width="200px" hAlign="End">
-                <customData>
-                <core:CustomData 
-                  key="p13nData" 
-                  value='\{"columnKey": "Kunnr", "maxLength": "10","columnIndex":"0", "isCurrency": false, "leadingProperty": "Kunnr", "sortProperty": "Kunnr", "type": "string"}' />
-                </customData>
-                <Label id="header-kunnr-label" text="{/#Clientes/Kunnr/@sap:label}"/>
-              </Column>
-            </columns>
-            <items>
-              <ColumnListItem id="customCustomerItem">
-                <cells>
-                  <!-- Custom Kunnr Cell -->
-                  <Text id="customer-kunnr" text="{path:'Kunnr', formatter:'.formatter.deleteLeadingZeros'}"/>
-                </cells>
-              </ColumnListItem>
-            </items>
-          </Table>
-        </sap.ui.comp.smarttable:SmartTable> 
-        <VBox id="subcontent" class="sapUiResponsiveContentPadding">
         <!-- Smart Table -->
           <sap.ui.comp.smarttable:SmartTable 
             xmlns:sap.ui.comp.smarttable="sap.ui.comp.smarttable"
@@ -125,7 +71,9 @@
             showRowCount="true"
             fitContainer="true" 
             tableType="ResponsiveTable"
-            enableAutoBinding="true" 
+            enableAutoBinding="true"
+            header="{i18n>balanceTableTitle}"
+            smartFilterId="filterbar"
             id="balanceTable"
             demandPopin="true"
             useVariantManagement="false"
@@ -133,10 +81,10 @@
             showFullScreenButton="true"
             justifyContent="Center"
             initiallyVisibleFields="Kunnr,Name1"
+            beforeRebindTable="onBeforeRebindBalancesTable"
             class="sapUiResponsiveContentPadding"
             alignContent="Center">
           </sap.ui.comp.smarttable:SmartTable> 
-        </VBox>
       </VBox>
     </semantic:content>
       <!-- Semantic Footer Buttons -->
