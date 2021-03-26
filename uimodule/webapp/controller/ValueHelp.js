@@ -81,9 +81,9 @@ sap.ui.define(
       // eslint-disable-next-line no-unused-vars
       onKunnrSelection: function (_oEvent) {
         var oTable = oVhController._oValueHelpDialog.getTable(),
-          aItems = oTable.getSelectedItems();
+          aItems = oVhController._getObjects(oTable);
 
-        this._addTokens(oVhController._oMultiInput, aItems);
+        oVhController._addTokens(oVhController._oMultiInput, aItems);
 
         oVhController._oValueHelpDialog.close();
       },
@@ -134,6 +134,27 @@ sap.ui.define(
       /* =========================================================== */
       /* Internal Methods                                            */
       /* =========================================================== */
+
+      /**
+       * Convenience method for obtaining object of Rows
+       * @param {sap.ui.table, [int]} aTable the table from where entities are, aIndices the indices which requiere obtain the entities
+       * @return {array} The arrays of Objects (the context objects) of oData
+       * @private
+       */
+      _getObjects: function (oTable) {
+        var aIndices = oTable.getSelectedIndices();
+
+        try {
+          return aIndices.length > 0
+            ? aIndices.map(function (i) {
+                return oTable.getContextByIndex(i).getObject();
+              })
+            : [];
+        } catch (err) {
+          return [];
+        }
+      },
+
       /**
        * Gets all Live Filters.
        *
@@ -334,9 +355,8 @@ sap.ui.define(
                   path: "/ZonasSet",
                   template: new sap.ui.core.ListItem({
                     key: "{path: 'Bzirk'}",
-                    text: "{path: 'Bztxt'}",
-                    additionalText:
-                      "{path: 'Bzirk', formatter:'formatter.deleteLeadingZeros'}",
+                    text: "{path: 'Bzirk'}",
+                    additionalText: "{path: 'Bztxt'}",
                   }),
                 },
               }),
@@ -352,7 +372,28 @@ sap.ui.define(
                 name: "Kunnr",
                 liveChange: oVhController.onVhLiveChange,
                 placeholder: oVhController.readFromI18n("kunnrPH"),
-                showSecondaryValues: true,
+              }),
+            }),
+            // Location Item
+            new sap.ui.comp.filterbar.FilterGroupItem({
+              groupName: "_group1",
+              name: "location",
+              mandatory: false,
+              label: oVhController.readFromI18n("locationLabel"),
+              control: new sap.m.Input({
+                id: "locationIN",
+                placeholder: oVhController.readFromI18n("locationPH"),
+              }),
+            }),
+            // Type Item
+            new sap.ui.comp.filterbar.FilterGroupItem({
+              groupName: "_group1",
+              name: "type",
+              mandatory: false,
+              label: oVhController.readFromI18n("typeLabel"),
+              control: new sap.m.Input({
+                id: "typeIN",
+                placeholder: oVhController.readFromI18n("typePH"),
               }),
             }),
           ],
