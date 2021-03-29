@@ -14,7 +14,7 @@
     id="customersPage" 
     headerPinnable="true" 
     toggleHeaderOnTitleClick="true"
-    showFooter="true"
+    showFooter="false"
     preserveHeaderStateOnScroll="false"
     titleAreaShrinkRatio="1:1.6:1.6">
     <!-- Title Heading-->
@@ -80,7 +80,7 @@
             showVariantManagement="false"
             showFullScreenButton="true"
             justifyContent="Center"
-            initiallyVisibleFields="Kunnr,Name1"
+            initiallyVisibleFields="Bzirk,Kunnr,Name1,Ort01"
             beforeRebindTable="onBeforeRebindBalancesTable"
             class="sapUiResponsiveContentPadding"
             alignContent="Center">
