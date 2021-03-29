@@ -136,10 +136,12 @@ sap.ui.define(
       /* =========================================================== */
 
       /**
-       * Convenience method for obtaining object of Rows
-       * @param {sap.ui.table, [int]} aTable the table from where entities are, aIndices the indices which requiere obtain the entities
-       * @return {array} The arrays of Objects (the context objects) of oData
+       * Convenience method for obtaining object of selected indices.
+       *
+       * @function
        * @private
+       * @param {sap.ui.table]} oTable the table from where to read objects
+       * @return {array} The arrays of Objects (the context objects) of oData
        */
       _getObjects: function (oTable) {
         var aIndices = oTable.getSelectedIndices();
