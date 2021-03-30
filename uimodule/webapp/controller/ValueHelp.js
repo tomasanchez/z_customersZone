@@ -79,11 +79,12 @@ sap.ui.define(
        * @param {sap.ui.base.Event} oEvent the press event
        */
       // eslint-disable-next-line no-unused-vars
-      onKunnrSelection: function (_oEvent) {
-        var oTable = oVhController._oValueHelpDialog.getTable(),
-          aItems = oVhController._getObjects(oTable);
+      onKunnrSelection: function (oEvent) {
+        var aTokens = oEvent.getParameter("tokens");
+        //var oTable = oVhController._oValueHelpDialog.getTable(),
+        //  aItems = oVhController._getObjects(oTable);
 
-        oVhController._addTokens(oVhController._oMultiInput, aItems);
+        oVhController._addTokens(oVhController._oMultiInput, aTokens);
 
         oVhController._oValueHelpDialog.close();
       },
@@ -263,26 +264,19 @@ sap.ui.define(
        * @function
        * @private
        * @param {sap.m.MultiInput} oMultiInput the input to add tokens
-       * @param {array} aItems the context items array
+       * @param {array} aTokens the context items array
        */
-      _addTokens: function (oMultiInput, aItems) {
+      _addTokens: function (oMultiInput, aTokens) {
         var aPreviousTokens = oMultiInput.getTokens();
 
-        aItems.forEach((oItem) => {
+        aTokens.forEach((oToken) => {
           if (
             // Verification if alredy exists
-            !aPreviousTokens.some(function (oToken) {
-              return oToken.getKey() === oItem.Kunnr;
+            !aPreviousTokens.some(function (oPreviousToken) {
+              return oPreviousToken.getKey() === oToken.getKey();
             })
           ) {
-            oMultiInput.addToken(
-              new sap.m.Token({
-                // Description shown in token
-                text: oItem.Name1,
-                // Primary key of entity
-                key: oItem.Kunnr,
-              })
-            );
+            oMultiInput.addToken(oToken);
           }
         });
 
