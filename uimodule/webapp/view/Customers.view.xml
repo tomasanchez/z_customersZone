@@ -47,7 +47,7 @@
            <!-- Test Control -->
           <smartFilterBar:ControlConfiguration id="kunnrCtrl" key="Kunnr" index="0" label="{i18n>kunnrsLabel}" groupId="_BASIC" width="450px" mandatory="mandatory">
             <smartFilterBar:customControl>
-              <MultiInput  id="kunnrMI" showValueHelp="true" valueHelpOnly="true" valueHelpRequest=".onVHPKunnr" placeholder="{i18n>kunnrMIPH}" valueStateText="{i18n>kunnrsState}"/>
+              <MultiInput  id="kunnrMI" showValueHelp="true" valueHelpRequest=".onVHPKunnr" placeholder="{i18n>kunnrMIPH}" valueStateText="{i18n>kunnrsState}"/>
             </smartFilterBar:customControl>
           </smartFilterBar:ControlConfiguration>
         </smartFilterBar:controlConfiguration>
