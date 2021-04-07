@@ -80,7 +80,7 @@
             showVariantManagement="false"
             showFullScreenButton="true"
             justifyContent="Center"
-            initiallyVisibleFields="Bzirk,Kunnr,Name1,Ort01"
+            initiallyVisibleFields="Bzirk,Kunnr,Name1,Ort01,TotalCC,VencidoCC,AvencerCC,TotalFin,AVencerCND,VencidoCND,ValorComercial"
             beforeRebindTable="onBeforeRebindBalancesTable"
             class="sapUiResponsiveContentPadding"
             alignContent="Center">
