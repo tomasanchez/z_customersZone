@@ -45,6 +45,17 @@ sap.ui.define([], function () {
      */
     toLocaleNumber: Intl.NumberFormat().format,
 
+    numberStatePositive: function (fValue) {
+      var fNumber = parseFloat(fValue);
+      return fNumber < 0 ? "Error" : fNumber === 0 ? "Warning" : "Success";
+    },
+
+    /**
+     * Number formatter.
+     *
+     * @param {float} fValue a value to be formatted
+     * @returns {string} the formatted number
+     */
     toNumber: function (fValue) {
       fValue = parseFloat(fValue);
       return Intl.NumberFormat().format(fValue.toFixed(2));
