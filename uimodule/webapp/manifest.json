@@ -19,6 +19,7 @@
           "semanticObject": "Clientes",
           "action": "display",
           "title": "{{appTitle}}",
+          "subTitle": "{{appDescription}}",
           "icon": "sap-icon://customer"
         }
       }
