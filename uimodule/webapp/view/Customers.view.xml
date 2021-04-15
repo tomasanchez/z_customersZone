@@ -47,7 +47,7 @@
            <!-- Test Control -->
           <smartFilterBar:ControlConfiguration id="kunnrCtrl" key="Kunnr" index="0" label="{i18n>kunnrsLabel}" groupId="_BASIC" width="450px" mandatory="mandatory">
             <smartFilterBar:customControl>
-              <MultiInput  id="kunnrMI" showValueHelp="true" valueHelpRequest=".onVHPKunnr" placeholder="{i18n>kunnrMIPH}" valueStateText="{i18n>kunnrsState}"/>
+              <MultiInput  id="kunnrMI" showValueHelp="true" valueHelpOnly="true" valueHelpRequest=".onVHPKunnr" placeholder="{i18n>kunnrMIPH}" valueStateText="{i18n>kunnrsState}"/>
             </smartFilterBar:customControl>
           </smartFilterBar:ControlConfiguration>
         </smartFilterBar:controlConfiguration>
@@ -80,10 +80,105 @@
             showVariantManagement="false"
             showFullScreenButton="true"
             justifyContent="Center"
-            initiallyVisibleFields="Bzirk,Kunnr,Name1,Ort01,TotalCC,VencidoCC,AvencerCC,TotalFin,AVencerCND,VencidoCND,ValorComercial"
+            initiallyVisibleFields="Bzirk,Kunnr,Name1,Ort01"
             beforeRebindTable="onBeforeRebindBalancesTable"
             class="sapUiResponsiveContentPadding"
             alignContent="Center">
+            <!-- Custom Table -->
+            <Table 
+             id="customTable"
+             alternateRowColors="true"
+             sticky="ColumnHeaders,HeaderToolbar">
+             <!-- Columns -->
+              <columns>
+              <!-- Custom Total CC -->
+                <Column id="totalCC" width="auto" hAlign="Begin">
+                  <customData>
+                    <core:CustomData 
+                      key="p13nData" 
+                      value='\{"columnKey": "TotalCC", "maxLength": "10","columnIndex":"4", "isCurrency": false, "leadingProperty": "TotalCC", "sortProperty": "TotalCC", "type": "string"}' />
+                  </customData>
+                  <Label id="header-TotalCC-label" text="{/#Balances/TotalCC/@sap:label}"/>
+                </Column>
+              <!-- Custom Vencido CC -->
+                <Column id="VencidoCC" width="auto" hAlign="Begin">
+                  <customData>
+                    <core:CustomData 
+                      key="p13nData" 
+                      value='\{"columnKey": "VencidoCC", "maxLength": "10","columnIndex":"6", "isCurrency": false, "leadingProperty": "VencidoCC", "sortProperty": "VencidoCC", "type": "string"}' />
+                  </customData>
+                  <Label id="header-VencidoCC-label" text="{/#Balances/VencidoCC/@sap:label}"/>
+                </Column>
+               <!-- Custom A vencer CC -->
+                <Column id="AvencerCC" width="auto" hAlign="Begin">
+                  <customData>
+                    <core:CustomData 
+                      key="p13nData" 
+                      value='\{"columnKey": "AvencerCC", "maxLength": "10","columnIndex":"5", "isCurrency": false, "leadingProperty": "AvencerCC", "sortProperty": "AvencerCC", "type": "string"}' />
+                  </customData>
+                  <Label id="header-AvencerCC-label" text="{/#Balances/AvencerCC/@sap:label}"/>
+                </Column>
+               <!-- Custom ValorComercial -->
+                <Column id="ValorComercial" width="auto" hAlign="Begin">
+                  <customData>
+                    <core:CustomData 
+                      key="p13nData" 
+                      value='\{"columnKey": "ValorComercial", "maxLength": "10","columnIndex":"7", "isCurrency": false, "leadingProperty": "ValorComercial", "sortProperty": "ValorComercial", "type": "string"}' />
+                  </customData>
+                  <Label id="header-ValorComercial-label" text="{/#Balances/ValorComercial/@sap:label}"/>
+                </Column> 
+                <!-- Custom TotalCND -->
+                <Column id="TotalCND" width="auto" hAlign="Begin">
+                  <customData>
+                    <core:CustomData 
+                      key="p13nData" 
+                      value='\{"columnKey": "TotalCND", "maxLength": "10","columnIndex":"8", "isCurrency": false, "leadingProperty": "TotalCND", "sortProperty": "TotalCND", "type": "string"}' />
+                  </customData>
+                  <Label id="header-TotalCND-label" text="{/#Balances/TotalCND/@sap:label}"/>
+                </Column>
+                <!-- Custom TotalCND -->
+                <Column id="AvencerCND" width="auto" hAlign="Begin">
+                  <customData>
+                    <core:CustomData 
+                      key="p13nData" 
+                      value='\{"columnKey": "AvencerCND", "maxLength": "10","columnIndex":"9", "isCurrency": false, "leadingProperty": "AvencerCND", "sortProperty": "TotalCND", "type": "string"}' />
+                  </customData>
+                  <Label id="header-AvencerCND-label" text="{/#Balances/AvencerCND/@sap:label}"/>
+                </Column>
+                <!-- Custom TotalCND -->
+                <Column id="VencidoCND" width="auto" hAlign="Begin">
+                  <customData>
+                    <core:CustomData 
+                      key="p13nData" 
+                      value='\{"columnKey": "VencidoCND", "maxLength": "10","columnIndex":"10", "isCurrency": false, "leadingProperty": "VencidoCND", "sortProperty": "VencidoCND", "type": "string"}' />
+                  </customData>
+                  <Label id="header-VencidoCND-label" text="{/#Balances/VencidoCND/@sap:label}"/>
+                </Column>                                 
+              </columns>
+              <!-- Items -->
+              <items>
+                <ColumnListItem id="customBalanceItem">
+                  <cells>
+                    <!-- Formatted TotalCC -->
+                    <ObjectNumber id="TotalCC-field" number="{path:'TotalCC', formatter:'.formatter.toNumber'}" state="{path:'TotalCC', formatter:'.formatter.numberStatePositive'}"/>
+                    <!-- Formatted VencidoCC -->
+                    <ObjectNumber id="VencidoCC-field" number="{path:'VencidoCC', formatter:'.formatter.toNumber'}" state="Error"/>
+                    <!-- Formatted A Vencer -->
+                    <ObjectNumber id="AvencerCC-field" number="{path:'AvencerCC', formatter:'.formatter.toNumber'}" state="Warning"/>
+                    <!-- ======================================================================================================= -->
+                    <!-- Formatted Valor Comercial -->
+                    <ObjectNumber id="ValorComercial-field" number="{path:'ValorComercial', formatter:'.formatter.toNumber'}" state="Information"/>
+                    <!-- ======================================================================================================= -->
+                    <!-- Formatted TotalCND -->
+                    <ObjectNumber id="TotalCND-field" number="{path:'TotalCND', formatter:'.formatter.toNumber'}" state="Success"/>
+                    <!-- Formatted AvencerCND -->
+                    <ObjectNumber id="AvencerCND-field" number="{path:'AvencerCND', formatter:'.formatter.toNumber'}" state="Warning"/>
+                    <!-- Formatted VencidoCND -->
+                    <ObjectNumber id="VencidoCND-field" number="{path:'VencidoCND', formatter:'.formatter.toNumber'}" state="Error"/>
+                  </cells>
+                </ColumnListItem>
+              </items>
+            </Table>
           </sap.ui.comp.smarttable:SmartTable> 
       </VBox>
     </semantic:content>
