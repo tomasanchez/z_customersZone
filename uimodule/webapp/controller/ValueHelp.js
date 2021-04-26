@@ -374,6 +374,7 @@ sap.ui.define(
             new sap.ui.comp.filterbar.FilterGroupItem({
               groupName: "_group1",
               name: "location",
+              visible: false,
               mandatory: false,
               label: oVhController.readFromI18n("locationLabel"),
               control: new sap.m.Input({
@@ -386,6 +387,7 @@ sap.ui.define(
               groupName: "_group1",
               name: "type",
               mandatory: false,
+              visible: false,
               label: oVhController.readFromI18n("typeLabel"),
               control: new sap.m.Input({
                 id: "typeIN",
